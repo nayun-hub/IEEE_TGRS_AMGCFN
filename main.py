@@ -494,7 +494,7 @@ for curr_seed in Seed_List:
                 AVG_ALL.append(test_AC_list)
 
                 # 保存数据信息
-                f = open('results\\' + dataset_name + '_results.txt', 'a+')
+                f = open('.\\results\\' + dataset_name + '_results.txt', 'a+')
                 str_results = '\n======================' \
                               + " learning rate=" + str(learning_rate) \
                               + " epochs=" + str(max_epoch) \
@@ -545,7 +545,7 @@ for curr_seed in Seed_List:
                 if valloss < best_loss:
                     best_loss = valloss
                     best_OA = valOA
-                    torch.save(net.state_dict(), "model\\best_model.pt")
+                    torch.save(net.state_dict(), ".\\model\\best_model.pt")
                     print('save model...')
             torch.cuda.empty_cache()
             net.train()
@@ -560,7 +560,7 @@ for curr_seed in Seed_List:
 
     print('Test start')
     with torch.no_grad():
-        net.load_state_dict(torch.load("model\\best_model.pt"))
+        net.load_state_dict(torch.load(".\\model\\best_model.pt"))
         net.eval()
         tic3 = time.time()
         out, _, _ = net(S, A, A2, A3, net_input)
@@ -576,9 +576,9 @@ for curr_seed in Seed_List:
         classification_map = torch.argmax(
             out, 1).reshape([height, width]).cpu() + 1
         Draw_Classification_Map(
-            classification_map, "results\\" + dataset_name + str(testOA))
+            classification_map, ".\\results\\" + dataset_name + str(testOA))
         Draw_Classification_Map_Bg(
-            classification_map, "results\\" + dataset_name + str(testOA) + "Bg")
+            classification_map, ".\\results\\" + dataset_name + str(testOA) + "Bg")
         Test_Time_ALL.append(testing_time)
     print('Test finished')
     torch.cuda.empty_cache()
