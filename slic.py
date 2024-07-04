@@ -59,14 +59,6 @@ class SLIC(object):
         self.superpixel_count = superpixel_count
         print("superpixel_count", superpixel_count)
 
-        # 显示超像素图片
-        out = mark_boundaries(img[:, :, [0, 1, 2]], segments)
-        # out = (img[:, :, [0, 1, 2]] - np.min(img[:, :, [0, 1, 2]])) / (np.max(img[:, :, [0, 1, 2]]) -
-        #                                                                np.min(img[:, :, [0, 1, 2]]))
-        # plt.figure()
-        # plt.imshow(out)
-        # plt.show()
-
         segments = np.reshape(segments, [-1])
         S = np.zeros([superpixel_count, d], dtype=np.float32)
         Q = np.zeros([w * h, superpixel_count], dtype=np.float32)
